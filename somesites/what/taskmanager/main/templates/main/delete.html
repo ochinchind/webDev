@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block title %} 
+Удалить задачу
+{% endblock %}
+
+{% block content %} 
+    <h1>Все задачи: </h1>
+    {% if tasks  %}
+        {% for el in tasks %}
+            <div class = "alert mt-2" style="border: 1px black solid;">
+                <form method = "post">
+                    {% csrf_token %}
+                    <input id="elid" type="text" name="idel" style = "visibility:hidden;" value="{{ el.id }}">
+                    <h3>{{ el.title }}</h3>
+                    <p>{{ el.task }}</p>
+                    <div style="text-align: right; margin-left: 80%;">
+                        <button type="submit" class="w-100 btn btn-lg btn-primary" >Удалить</button>
+                    </div>
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>У вас нет записей</p>
+    {% endif %}
+{% endblock %}
